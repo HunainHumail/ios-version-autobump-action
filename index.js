@@ -100,7 +100,11 @@ Toolkit.run(async (tools) => {
     console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
 
     let fileContent = fs.readFileSync(PbxPath);
+    console.log('PATHHHH: ', PbxPath)
+
     console.log('FILE CONTENT: ', fileContent)
+
+    console.log('FILE CONTENT STRING: ', versionCodeRegexPattern.exec(fileContent.toString()))
 
 
     let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
