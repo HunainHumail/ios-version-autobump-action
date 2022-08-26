@@ -96,18 +96,12 @@ Toolkit.run(async (tools) => {
 
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]);/;
-    console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
+    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+);/;
 
-    let fileContent = fs.readFileSync(PbxPath,'utf-8');
-    console.log('PATHHHH: ', PbxPath)
+    let fileContent = fs.readFileSync(PbxPath);
+    console.log('file content: ',versionNameRegexPattern.exec(fileContent)[0]);
 
-    console.log('FILE CONTENT: ', fileContent)
-
-    console.log('FILE CONTENT STRING: ', versionCodeRegexPattern.exec(fileContent.toString()))
-
-
-    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString()));
+    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
     console.log(`Current version: ${currentVersionName}`);
 
     let newVersionName = semver.inc(currentVersionName, "minor");
