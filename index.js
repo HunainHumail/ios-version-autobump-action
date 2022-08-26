@@ -99,7 +99,7 @@ Toolkit.run(async (tools) => {
     const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
     console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
 
-    let fileContent = fs.readFileSync(PbxPath);
+    let fileContent = fs.readFileSync(PbxPath, 'utf-8');
     console.log('PATHHHH: ', PbxPath)
 
     console.log('FILE CONTENT: ', fileContent)
