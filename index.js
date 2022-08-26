@@ -106,6 +106,7 @@ Toolkit.run(async (tools) => {
     console.log(`Current version: ${currentVersionName}`);
 
     let newVersionName = semver.inc(currentVersionName, "minor");
+    console.log('NEW VERSION NAME SEMVER: ', )
     console.log(`New version: ${newVersionName}`);
     let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
     newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionName}`, `MARKETING_VERSION = ${newVersionName}`)
