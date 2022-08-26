@@ -97,8 +97,11 @@ Toolkit.run(async (tools) => {
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
     const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
+    console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
 
     let fileContent = fs.readFileSync(PbxPath);
+    console.log('FILE CONTENT: ', fileContent)
+
 
     let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
     console.log(`Current version: ${currentVersionName}`);
