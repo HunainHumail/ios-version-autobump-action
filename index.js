@@ -107,7 +107,7 @@ Toolkit.run(async (tools) => {
     console.log('FILE CONTENT STRING: ', versionCodeRegexPattern.exec(fileContent.toString()))
 
 
-    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[0]);
+    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString()));
     console.log(`Current version: ${currentVersionName}`);
 
     let newVersionName = semver.inc(currentVersionName, "minor");
