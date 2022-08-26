@@ -96,7 +96,7 @@ Toolkit.run(async (tools) => {
 
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
+    const versionCodeRegexPattern = /MARKETING_VERSION = ([0-9]+(\.[0-9]+)+);/;
     console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
 
     let fileContent = fs.readFileSync(PbxPath, 'utf-8');
