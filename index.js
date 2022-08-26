@@ -99,7 +99,7 @@ Toolkit.run(async (tools) => {
     const versionCodeRegexPattern = /MARKETING_VERSION = ([0-9]+(\.[0-9]+)+);/;
     console.log('VERSION CODE REGEX: ', versionCodeRegexPattern)
 
-    let fileContent = fs.readFileSync(PbxPath, 'utf-8');
+    let fileContent = fs.readFileSync(PbxPath);
     console.log('PATHHHH: ', PbxPath)
 
     console.log('FILE CONTENT: ', fileContent)
@@ -107,7 +107,7 @@ Toolkit.run(async (tools) => {
     console.log('FILE CONTENT STRING: ', versionCodeRegexPattern.exec(fileContent.toString()))
 
 
-    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
+    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[0]);
     console.log(`Current version: ${currentVersionName}`);
 
     let newVersionName = semver.inc(currentVersionName, "minor");
