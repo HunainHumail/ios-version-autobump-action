@@ -101,7 +101,8 @@ Toolkit.run(async (tools) => {
     let fileContent = fs.readFileSync(PbxPath);
     console.log('file content: ',versionCodeRegexPattern.exec(fileContent)[0]);
 
-    let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
+    // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
+    let currentVersionName = fileContent.replace('CURRENT_PROJECT_VERSION = ','');
     console.log(`Current version: ${currentVersionName}`);
 
     let newVersionName = semver.inc(currentVersionName, "minor");
