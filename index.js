@@ -2,6 +2,8 @@ const {Toolkit} = require('actions-toolkit');
 const core = require('@actions/core');
 const semver = require('semver')
 const fs = require('fs');
+const semver2int = require('semver2int');
+
 
 // Change working directory if user defined PBX_PATH
 
@@ -97,19 +99,39 @@ Toolkit.run(async (tools) => {
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
     const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+);/;
+    const versionMarketingRegexPattern = /MARKETING_VERSION = ([0-9]+.[0-9].[0-9]);/;
+
 
     let fileContent = fs.readFileSync(PbxPath);
     console.log('file content: ',versionCodeRegexPattern.exec(fileContent)[0]);
+    console.log('file content: ',versionMarketingRegexPattern.exec(fileContent)[0]);
+
 
     // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
     let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
-    console.log(`Current version: ${currentVersionName}`);
+    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
 
-    let newVersionName = semver.inc(currentVersionName, "minor");
-    console.log('NEW VERSION NAME SEMVER: ', semver.inc(currentVersionName, "minor"))
+    console.log(`Current version: ${currentVersionName}`);
+    console.log(`Current MARKETING version: ${currentVersionNameMarketing}`);
+
+
+    // let newVersionName = semver.inc(currentVersionName, "minor");
+    // let newVersionName =   currentVersionName + 1
+    let newMarketingVersionName =   semver.inc(currentVersionName, "minor")
+    let newVersionName =   semver2int(newMarketingVersionName)
+
+    
+
+    // console.log('NEW VERSION NAME SEMVER: ', semver.inc(currentVersionName, "minor"))
+    // console.log(`New version: ${newVersionName}`);
+
+    // console.log('NEW VERSION NAME SEMVER: ', semver.inc(currentVersionName, "minor"))
     console.log(`New version: ${newVersionName}`);
+    console.log(`New Marketing version: ${newVersionName}`);
+
+
     let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
-    newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionName}`, `MARKETING_VERSION = ${newVersionName}`)
+    newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionNameMarketing}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
     let newVersion;
 
     // case: if user sets push to false, to skip pushing new tag/package.json
