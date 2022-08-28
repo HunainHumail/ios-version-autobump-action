@@ -98,8 +98,8 @@ Toolkit.run(async (tools) => {
 
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+)/;
-    const versionMarketingRegexPattern = /MARKETING_VERSION = ([0-9]+.[0-9].[0-9])/;
+    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+)/g;
+    const versionMarketingRegexPattern = /MARKETING_VERSION = ([0-9]+.[0-9].[0-9])/g;
 
 
     let fileContent = fs.readFileSync(PbxPath);
@@ -108,8 +108,8 @@ Toolkit.run(async (tools) => {
 
 
     // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
-    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
-    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace('MARKETING_VERSION = ','');
+    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace(/CURRENT_PROJECT_VERSION = /g,'');
+    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace(/MARKETING_VERSION = /g,'');
 
     console.log(`Current version: ${currentVersionName}`);
     console.log(`Current MARKETING version: ${currentVersionNameMarketing}`);
@@ -131,8 +131,8 @@ Toolkit.run(async (tools) => {
     console.log(`New Marketing version: ${newMarketingVersionName}`);
 
 
-    let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
-    newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionNameMarketing}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
+    let newFileContent = fileContent.toString().replace(/CURRENT_PROJECT_VERSION = "${currentVersionName}"/g, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
+    newFileContent = newFileContent.toString().replace(/MARKETING_VERSION = ${currentVersionNameMarketing}/g, `MARKETING_VERSION = ${newMarketingVersionName}`)
     let newVersion;
     console.log('NEW VERSIONNNN DONE')
 
