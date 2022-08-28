@@ -133,7 +133,7 @@ Toolkit.run(async (tools) => {
     console.log(`New Marketing version: ${newMarketingVersionName}`);
 
 
-    let newFileContent = replaceAll(fileContent.toString(),`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
+    let newFileContent = replaceAll(fileContent.toString(),`CURRENT_PROJECT_VERSION = ${currentVersionName}`, `CURRENT_PROJECT_VERSION = ${newVersionName}`);
     newFileContent = replaceAll(newFileContent.toString(),`MARKETING_VERSION = ${currentVersionNameMarketing}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
     let newVersion;
     console.log('NEW VERSIONNNN DONE')
