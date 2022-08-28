@@ -114,10 +114,11 @@ Toolkit.run(async (tools) => {
     console.log(`Current version: ${currentVersionName}`);
     console.log(`Current MARKETING version: ${currentVersionNameMarketing}`);
 
-
+    console.log('THE VERSION: ', version)
     // let newVersionName = semver.inc(currentVersionName, "minor");
     // let newVersionName =   currentVersionName + 1
-    let newMarketingVersionName =   semver.inc(currentVersionNameMarketing, "minor")
+    let newMarketingVersionName = semver.inc(currentVersionNameMarketing, version)
+    console.log('SEMVER MARKETING V: ', semver.inc(currentVersionNameMarketing, version))
     let newVersionName =   semver2int(newMarketingVersionName)
 
     
