@@ -110,6 +110,9 @@ Toolkit.run(async (tools) => {
     // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
     let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
     let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace('MARKETING_VERSION = ','');
+    console.log(currentVersionName)
+    console.log(currentVersionNameMarketing)
+
     let extractedCurrentVersion = currentVersionName.split(';')
     let extractedMarketingVersion = currentVersionNameMarketing.split(';')
 
