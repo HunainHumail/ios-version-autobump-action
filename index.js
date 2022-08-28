@@ -108,22 +108,17 @@ Toolkit.run(async (tools) => {
 
 
     // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
-    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace("CURRENT_PROJECT_VERSION = ","");
-    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace("MARKETING_VERSION = ","");
-    console.log(currentVersionName)
-    console.log(currentVersionNameMarketing)
+    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
+    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace('MARKETING_VERSION = ','');
 
-    let extractedCurrentVersion = currentVersionName.split(';')
-    let extractedMarketingVersion = currentVersionNameMarketing.split(';')
-
-    console.log(`Current version: ${extractedCurrentVersion}`);
-    console.log(`Current MARKETING version: ${extractedMarketingVersion}`);
+    console.log(`Current version: ${currentVersionName}`);
+    console.log(`Current MARKETING version: ${currentVersionNameMarketing}`);
 
     console.log('THE VERSION: ', version)
     // let newVersionName = semver.inc(currentVersionName, "minor");
     // let newVersionName =   currentVersionName + 1
-    let newMarketingVersionName = semver.inc(extractedMarketingVersion, version)
-    console.log('SEMVER MARKETING V: ', semver.inc(extractedMarketingVersion, version))
+    let newMarketingVersionName = semver.inc(currentVersionNameMarketing, version)
+    console.log('SEMVER MARKETING V: ', semver.inc(currentVersionNameMarketing, version))
     let newVersionName =   semver2int(newMarketingVersionName)
 
     
@@ -136,8 +131,8 @@ Toolkit.run(async (tools) => {
     console.log(`New Marketing version: ${newMarketingVersionName}`);
 
 
-    let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${extractedCurrentVersion}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
-    newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${extractedMarketingVersion}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
+    let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
+    newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionNameMarketing}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
     let newVersion;
     console.log('NEW VERSIONNNN DONE')
 
