@@ -117,7 +117,7 @@ Toolkit.run(async (tools) => {
 
     // let newVersionName = semver.inc(currentVersionName, "minor");
     // let newVersionName =   currentVersionName + 1
-    let newMarketingVersionName =   semver.inc(currentVersionName, "minor")
+    let newMarketingVersionName =   semver.inc(currentVersionNameMarketing, "minor")
     let newVersionName =   semver2int(newMarketingVersionName)
 
     
@@ -127,12 +127,13 @@ Toolkit.run(async (tools) => {
 
     // console.log('NEW VERSION NAME SEMVER: ', semver.inc(currentVersionName, "minor"))
     console.log(`New version: ${newVersionName}`);
-    console.log(`New Marketing version: ${newVersionName}`);
+    console.log(`New Marketing version: ${newMarketingVersionName}`);
 
 
     let newFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
     newFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentVersionNameMarketing}`, `MARKETING_VERSION = ${newMarketingVersionName}`)
     let newVersion;
+    console.log('NEW VERSIONNNN DONE')
 
     // case: if user sets push to false, to skip pushing new tag/package.json
     const push = process.env['INPUT_PUSH']
