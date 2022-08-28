@@ -98,8 +98,8 @@ Toolkit.run(async (tools) => {
 
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+);/;
-    const versionMarketingRegexPattern = /MARKETING_VERSION = ([0-9]+.[0-9].[0-9]);/;
+    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+)/;
+    const versionMarketingRegexPattern = /MARKETING_VERSION = ([0-9]+.[0-9].[0-9])/;
 
 
     let fileContent = fs.readFileSync(PbxPath);
@@ -108,8 +108,8 @@ Toolkit.run(async (tools) => {
 
 
     // let currentVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
-    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace('CURRENT_PROJECT_VERSION = ','');
-    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace('MARKETING_VERSION = ','');
+    let currentVersionName = versionCodeRegexPattern.exec(fileContent)[0].toString().replace("CURRENT_PROJECT_VERSION = ","");
+    let currentVersionNameMarketing = versionMarketingRegexPattern.exec(fileContent)[0].toString().replace("MARKETING_VERSION = ","");
     console.log(currentVersionName)
     console.log(currentVersionNameMarketing)
 
