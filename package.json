@@ -23,5 +23,8 @@
     "actions-toolkit": "^6.0.1",
     "semver": "7.3.5",
     "semver2int": "^0.0.1"
+  },
+  "devDependencies": {
+    "string.prototype.replaceall": "^1.0.6"
   }
 }

@@ -3,6 +3,8 @@ const core = require('@actions/core');
 const semver = require('semver')
 const fs = require('fs');
 const semver2int = require('semver2int');
+const replaceAll = require('string.prototype.replaceall');
+
 
 
 // Change working directory if user defined PBX_PATH
