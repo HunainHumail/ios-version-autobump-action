@@ -238,10 +238,11 @@ Toolkit.run(async (tools) => {
 
     // now go to the actual branch to perform the same versioning
     console.log("isPullRequest: ", isPullRequest);
-    if (isPullRequest) {
-      // First fetch to get updated local version of branch
-      await tools.exec("git", ["fetch"]);
-    }
+    // if (isPullRequest) {
+    //   // First fetch to get updated local version of branch
+    //   await tools.exec("git", ["fetch"]);
+    // }
+    await tools.exec("git", ["fetch"]);
     await tools.exec("git", ["checkout", currentBranch]);
     fs.writeFileSync(PbxPath, newFileContent);
     newVersion = `${tagPrefix}${newVersionName}`;
