@@ -227,6 +227,7 @@ Toolkit.run(async (tools) => {
     // Writing the new version to the gradle file
     fs.writeFileSync(PbxPath, newFileContent);
 
+    console.log('TAGGG: ', tagPrefix)
     // Committing
     newVersion = `${tagPrefix}${newMarketingVersionName}`;
     await tools.exec("git", [
