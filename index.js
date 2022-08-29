@@ -228,7 +228,7 @@ Toolkit.run(async (tools) => {
     fs.writeFileSync(PbxPath, newFileContent);
 
     // Committing
-    newVersion = `${tagPrefix}${newVersionName}`;
+    newVersion = `${tagPrefix}${newMarketingVersionName}`;
     await tools.exec("git", [
       "commit",
       "-a",
@@ -245,7 +245,7 @@ Toolkit.run(async (tools) => {
     await tools.exec("git", ["fetch"]);
     await tools.exec("git", ["checkout", currentBranch]);
     fs.writeFileSync(PbxPath, newFileContent);
-    newVersion = `${tagPrefix}${newVersionName}`;
+    newVersion = `${tagPrefix}${newMarketingVersionName}`;
     console.log(`::set-output name=newTag::${newVersion}`);
     try {
       // to support "actions/checkout@v1"
@@ -264,7 +264,7 @@ Toolkit.run(async (tools) => {
 
     const remoteRepo = `https://${process.env.GITHUB_ACTOR}:${process.env.GITHUB_TOKEN}@github.com/${process.env.GITHUB_REPOSITORY}.git`;
     if (process.env["INPUT_SKIP-TAG"] !== "true") {
-      await tools.exec("git", ["tag", newVersion]);
+      await tools.exec("git", ["tag", newMarketingVersionName]);
       await tools.exec("git", ["push", remoteRepo, "--follow-tags"]);
       await tools.exec("git", ["push", remoteRepo, "--tags"]);
     } else {
