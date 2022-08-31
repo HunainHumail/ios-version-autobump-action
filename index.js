@@ -229,7 +229,7 @@ Toolkit.run(async (tools) => {
 
     console.log('TAGGG: ', tagPrefix)
     // Committing
-    newVersion = `${tagPrefix}${newMarketingVersionName}`;
+    newVersion = `${tagPrefix}${newVersion}`;
     await tools.exec("git", [
       "commit",
       "-a",
@@ -246,7 +246,7 @@ Toolkit.run(async (tools) => {
     await tools.exec("git", ["fetch"]);
     await tools.exec("git", ["checkout", currentBranch]);
     fs.writeFileSync(PbxPath, newFileContent);
-    newVersion = `${tagPrefix}${newMarketingVersionName}`;
+    newVersion = `${tagPrefix}${newVersion}`;
     console.log(`::set-output name=newTag::${newVersion}`);
     try {
       // to support "actions/checkout@v1"
